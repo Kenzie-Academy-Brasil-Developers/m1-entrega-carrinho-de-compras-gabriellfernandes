@@ -8,7 +8,7 @@ body{
 .tamanho{
     display: flex;
     flex-direction: column;
-    width: 500px;
+    width: 550px;
     height: 400px;
     background-color: azure;
     border-radius: 20px;
@@ -24,6 +24,11 @@ li{
     padding-left:10px;
     padding-right:10px;
     margin-bottom: 20px;
+}
+li:hover{
+    cursor: pointer;
+    background-color: rgb(219, 234, 234);
+    transition: 0.2s;
 }
 
 .nome{
@@ -48,9 +53,28 @@ li{
 }
 
 .botao{
-    margin-top: 80px;
-    height: 80px;
+    margin-top: 0px;
+    padding: 10px;
+    font-size: 24px;
+    background-color: #5bba6f;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    margin-bottom: 10px;
 }
+main .botao1{
+    background-color: #ff312e;
+}
+
+main .botao1:hover{
+    background-color: #ab2a27;
+}
+.botao:hover{
+    cursor: pointer;
+    transition: 0.8s;
+    background-color: rgba(39, 63, 39, 0.957);
+}
+
 
 #nomes{
     background-color: rgba(0, 0, 0, 0.597);

@@ -2,13 +2,13 @@ const productsCart = [
     {
         id: 0,
         name: "Uva Crimson",
-        price: 20.00,
+        price: 8.00,
         quantidade: 0
     },
     {
         id: 1,
         name: "Ferrero rocher",
-        price: 5.00,
+        price: 12.00,
         quantidade: 0
     },
     {
@@ -22,6 +22,12 @@ const productsCart = [
         name: "Água com gás",
         price: 5.00,
         quantidade: 0
+    },
+    {
+        id: 4,
+        name: "Total",
+        price: 0,
+        quantidade: 0
     }
 ]
 
@@ -34,6 +40,12 @@ body.appendChild(main)
 const finalizar = document.createElement("button")
 finalizar.innerText = "Finalizar"
 finalizar.className = "botao"
+
+const resetar = document.createElement("button")
+resetar.innerText = "Resetar Comprar"
+resetar.className = "botao" + " botao1"
+
+
 //Criando a lista nao ordenada
     const listaDeCompras = document.createElement("ul")
     main.appendChild(listaDeCompras)
@@ -82,21 +94,73 @@ finalizar.className = "botao"
             item1.appendChild(p1)
             listaDeCompras.appendChild(item1)
             
-            console.log(item1.id)
-            
-
         }
 
     }
 
     criandoItem()
 
+    function click(){
+        for (let i = 0; i < productsCart.length - 1; i++) {
+            document.getElementById(i).addEventListener("click",function(){
+                productsCart[i].quantidade += 1
+                document.getElementsByClassName("quantidade")[i + 1].innerText = productsCart[i].quantidade
+                soma(productsCart[productsCart.length - 1])
+                somaMoney(productsCart[productsCart.length - 1])
+            }) 
+        }     
+        
+    }
+    
+    click()
+
+    let totalQuantidade = 0
+    let totalPreco = 0
+
+    function soma(x){
+        let somaQuantidade = 0
+        
+        for (let i = 0; i< productsCart.length; i++) {
+            somaQuantidade += productsCart[i].quantidade
+        }
+        
+        
+        const total = document.getElementById(x.id)
+        total.querySelector(".quantidade").innerText = somaQuantidade
+        totalQuantidade = somaQuantidade
+    }
+    function somaMoney(x){
+        let somaQuantidade = 0
+        
+        for (let i = 0; i< productsCart.length; i++) {
+            if(productsCart[i].quantidade != 0 || productsCart[i].quantidade > 1){
+
+                somaQuantidade += productsCart[i].price * productsCart[i].quantidade
+
+            }
+        }
+        
+        const total = document.getElementById(x.id)
+        total.querySelector(".preco").innerText = somaQuantidade + ",00 R$"
+        totalPreco = somaQuantidade
+    }
+
+
+  
     //criando a fuction de evento para aumentar a quantidade
-    document.getElementById("0").addEventListener("click", function(){
-        productsCart[0].quantidade += 1
-        document.getElementsByClassName("quantidade").innerText = productsCart[0].quantidade
-    }) 
+    
 
     ///Botao de finalizar
 
     main.appendChild(finalizar)
+    main.appendChild(resetar)
+
+   
+
+    document.querySelector(".botao").addEventListener("click",event =>{
+        alert(`A quantidade de produtos comprados foi ${totalQuantidade} ficando no valor total de ${totalPreco},00 R$`)
+    })
+
+    document.getElementsByClassName("botao")[1].addEventListener("click", event =>{
+        location.reload()
+    })
