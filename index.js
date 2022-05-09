@@ -1,53 +1,29 @@
 const productsCart = [
     {
+        id: 0,
+        name: "Uva Crimson",
+        price: 20.00,
+        quantidade: 0
+    },
+    {
         id: 1,
-        name: "Uva cara",
-        price: 20.00
+        name: "Ferrero rocher",
+        price: 5.00,
+        quantidade: 0
     },
     {
         id: 2,
-        name: "Guarrafa de água 500ml",
-        price: 5.00
+        name: "Chocolate 1kg",
+        price: 25.00,
+        quantidade: 0
     },
     {
         id: 3,
-        name: "Chocolate 1kg",
-        price: 25.00
-    },
-    {
-        id: 4,
         name: "Água com gás",
-        price: 5.00
+        price: 5.00,
+        quantidade: 0
     }
 ]
-
-/* const div1 = document.getElementById("tamanho")
-
-const main = document.createElement("main")
-div1.appendChild(main)
-
-const tamanhoDiv = document.createElement("div")
-tamanhoDiv.className = "tamanhoDiv"
-main.appendChild(tamanhoDiv)
-
-const finaliza = document.createElement("button")
-finaliza.innerText = "Finalizar"
-
-let soma = 0
-
-const listaDeCompras = document.createElement("ul")
-main.appendChild(listaDeCompras)
-
-const item1 = document.createElement("li")
-
-const produto1 = document.getElementById("1")
-document.getElementById("1").addEventListener("click", event =>{
-    productsCart.name = document.querySelectorAll("figcaption"[0])
-    listaDeCompras.appendChild(item1)
-    console.log(productsCart.name)
-    console.log(document.querySelectorAll("figcaption"[0]).values)
-})
-item1.innerText = productsCart.name */
 
 const body = document.querySelector("body")
 
@@ -57,24 +33,70 @@ body.appendChild(main)
 
 const finalizar = document.createElement("button")
 finalizar.innerText = "Finalizar"
+finalizar.className = "botao"
+//Criando a lista nao ordenada
+    const listaDeCompras = document.createElement("ul")
+    main.appendChild(listaDeCompras)
+    //criando a li
+        const indicador = document.createElement("li")
+        
+        const nome = document.createElement("p")
+        nome.innerText = "Nome"
+        nome.className = "nome"
 
-const listaDeCompras = document.createElement("ul")
-main.appendChild(listaDeCompras)
+        const quantidade = document.createElement("p")
+        quantidade.innerText = "Quantidade"
+        quantidade.className = "quantidade"
 
-const indicador = document.createElement("li")
-indicador.innerText = "Nome"
+        const preco = document.createElement("p")
+        preco.innerText = "Preço"
+        preco.className = "preco"
 
-const preco = document.createElement("p")
-preco.innerText = "Preço"
+        indicador.id = "nomes"
+        indicador.appendChild(nome)
+        indicador.appendChild(quantidade)
+        indicador.appendChild(preco)
+        listaDeCompras.appendChild(indicador)
+    
+    //criando o primeiro item
+    function criandoItem (){
+        for (let i = 0; i < productsCart.length; i++) {
+            const item1 = document.createElement("li")
+        
+            const nome1 = document.createElement("p")
+            nome1.innerText = productsCart[i].name
+            nome1.className = "nome"
+    
+            const quantidade1 = document.createElement("p")
+            quantidade1.innerText = productsCart[i].quantidade
+            quantidade1.className = "quantidade"
+    
+            const p1 = document.createElement("p")
+            p1.innerText = productsCart[i].price  + ",00 R$"
+            p1.className = "preco"
+            
+            item1.id = productsCart[i].id
+            
+            item1.appendChild(nome1)
+            item1.appendChild(quantidade1)
+            item1.appendChild(p1)
+            listaDeCompras.appendChild(item1)
+            
+            console.log(item1.id)
+            
 
-indicador.appendChild(preco)
-listaDeCompras.appendChild(indicador)
+        }
 
-const item1 = document.createElement("li")
-item1.innerText = productsCart[0].name
+    }
 
-const p1 = document.createElement("p")
-p1.innerText = productsCart[0].price
+    criandoItem()
 
-item1.appendChild(p1)
-listaDeCompras.appendChild(item1)
+    //criando a fuction de evento para aumentar a quantidade
+    document.getElementById("0").addEventListener("click", function(){
+        productsCart[0].quantidade += 1
+        document.getElementsByClassName("quantidade").innerText = productsCart[0].quantidade
+    }) 
+
+    ///Botao de finalizar
+
+    main.appendChild(finalizar)
